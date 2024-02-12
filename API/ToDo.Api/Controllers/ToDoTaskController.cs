@@ -34,13 +34,23 @@ public class ToDoTaskController(ToDoTaskService taskService) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Post(ToDoTaskCreate task)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
+
         var newTask = await taskService.CreateAsync(task.Map());
         return CreatedAtAction(nameof(Get), new { id = newTask.Id }, newTask);
     }
-    
+
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> Update(Guid id, ToDoTaskCreate updatedTaskDto)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
+
         var task = await taskService.GetAsync(id.ToString());
 
         if (task is null)
