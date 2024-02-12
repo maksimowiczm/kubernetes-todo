@@ -1,9 +1,9 @@
-import type { MetaFunction } from "@remix-run/node";
+import { type MetaFunction } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
   return [{ title: "ToDo UI" }];
 };
 
 export default function Index() {
-  return <></>;
+  return <div>siema nic tu nie ma</div>;
 }
