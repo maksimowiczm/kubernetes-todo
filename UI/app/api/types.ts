@@ -3,3 +3,8 @@ export interface ToDoTask {
   title: string;
   description: string;
 }
+
+export interface ApiStatus {
+  pid: number;
+  id: string;
+}
