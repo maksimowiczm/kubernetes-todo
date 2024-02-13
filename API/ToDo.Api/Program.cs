@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using Microsoft.AspNetCore.Http.HttpResults;
 using ToDo.Logic;
 using ToDo.Persistence;
 
@@ -21,12 +20,21 @@ if (app.Environment.IsDevelopment() || true)
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
-app.MapControllers();
-
 var pid = Environment.ProcessId;
 var id = Guid.NewGuid();
 app.MapGet("/api/status", () => new { PID = pid, ID = id });
+
+app.MapPost("/susu", () =>
+{
+    // 🤫🤫🤫
+    Environment.Exit(0);
+
+    // await context.Response.CompleteAsync();
+    // await app.StopAsync();
+});
+
+app.UseHttpsRedirection();
+
+app.MapControllers();
 
 app.Run();

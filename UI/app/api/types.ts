@@ -4,7 +4,7 @@ export interface ToDoTask {
   description: string;
 }
 
-export interface ApiStatus {
+export interface Status {
   pid: number;
   id: string;
 }
