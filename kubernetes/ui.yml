@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui
+spec:
+  selector:
+    matchLabels:
+      app: ui
+  template:
+    metadata:
+      labels:
+        app: ui
+    spec:
+      containers:
+        - name: ui
+          image: todo/ui
+          imagePullPolicy: Never
+          env:
+            - name: api-address
+              valueFrom:
+                configMapKeyRef:
+                  name: api-configmap
+                  key: api-url
+            - name: DELAY
+              value: "0"
+            - name: API_SERVER
+              value: http://$(api-address)
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ui-service
+spec:
+  selector:
+    app: ui
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30002
+  type: LoadBalancer
