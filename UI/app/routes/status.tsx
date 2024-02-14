@@ -1,5 +1,5 @@
 import { ActionFunctionArgs, json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useFetcher, useLoaderData } from "@remix-run/react";
 import { getApiStatus, getStatus, killApi } from "~/api/status";
 
 export const loader = async () => {
@@ -23,10 +23,12 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 export default function Index() {
+  const fetcher = useFetcher();
   const { apiStatus, status } = useLoaderData<typeof loader>();
+
   return (
     <div className="p-1">
-      <form method="post">
+      <fetcher.Form method="post">
         <div className="p-2">
           <div>STATUS: {JSON.stringify(status)}</div>
           <button type="submit" name="type" value="ui">
@@ -42,7 +44,7 @@ export default function Index() {
             kill
           </button>
         </div>
-      </form>
+      </fetcher.Form>
     </div>
   );
 }

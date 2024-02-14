@@ -19,4 +19,6 @@ echo api $(minikube service api-service --url)
 echo ui $(minikube service ui-service --url)
 echo mongo-express $(minikube service mongo-express-service --url)
 
+minikube addons enable ingress &> /dev/null &
+
 minikube dashboard

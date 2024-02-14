@@ -11,3 +11,4 @@ kubectl $action -f $SCRIPT_DIR/mongo.yml
 kubectl $action -f $SCRIPT_DIR/mongo-express.yml
 kubectl $action -f $SCRIPT_DIR/api.yml
 kubectl $action -f $SCRIPT_DIR/ui.yml
+kubectl $action -f $SCRIPT_DIR/ingress.yml

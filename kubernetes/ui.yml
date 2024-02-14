@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: ui
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: ui
@@ -42,5 +43,3 @@ spec:
   ports:
     - port: 3000
       targetPort: 3000
-      nodePort: 30002
-  type: LoadBalancer
